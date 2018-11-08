@@ -18,12 +18,13 @@ def waveletSmooth( x, wavelet="db4", level=1, title=None ):
     coeff[1:] = ( pywt.threshold( i, value=uthresh, mode="soft" ) for i in coeff[1:] )
     # reconstruct the signal using the thresholded coefficients
     y = pywt.waverec( coeff, wavelet, mode="per" )
-    f, ax = plt.subplots()
-    plt.plot( x, color="b", alpha=0.5 )
-    plt.plot( y, color="b" )
-    if title:
-        ax.set_title(title)
-    ax.set_xlim((0,len(y)))
+#     f, ax = plt.subplots()
+#     plt.plot( x, color="b", alpha=0.1 )
+#     plt.plot( y, color="b" )
+#     if title:
+#         ax.set_title(title)
+#     ax.set_xlim((0,len(y)))
+    return y[:-1]
 
 waveletSmooth(rawdata)
 

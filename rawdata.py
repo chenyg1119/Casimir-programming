@@ -15,10 +15,10 @@ def raw(N, center, width, strength, sigma):
     return:
     raw data
     """
-    rawspace = np.linspace(0*np.pi,1*np.pi,N)
+    rawspace = np.linspace(0.4*np.pi,0.7*np.pi,N)
     signal_interval = np.linspace(0,np.pi,width)
     signal = strength*np.sin(signal_interval)
     pure = np.sin(rawspace)
     noise = sigma*np.random.normal(0,1,N)
     pure[int(center-np.floor(width/2)):int(center-np.floor(width/2)+width)] += signal
-    return pure + noise
+    return pure, pure + noise
