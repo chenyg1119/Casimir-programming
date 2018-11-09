@@ -1,4 +1,5 @@
 from numpy import *
+import numpy as np
 import scipy
 import pywt
 from statsmodels.robust import mad
@@ -12,8 +13,8 @@ def waveletSmooth( x, wavelet="db4", level=1, title=None ):
     # calculate a threshold
     # mean absolute deviation of cD_level
     sigma = mad( coeff[-level] )
-    #threshold = \sigma*\sqrt(2*log(n)/n)
-    uthresh = sigma * np.sqrt( 2*np.log(len( x )))
+    #threshold = sigma*sqrt(2*log(n)/n)
+    uthresh = sigma * sqrt( 2*log(len( x )))
     #apply soft threshold to cD_n
     coeff[1:] = ( pywt.threshold( i, value=uthresh, mode="soft" ) for i in coeff[1:] )
     # reconstruct the signal using the thresholded coefficients
@@ -26,7 +27,7 @@ def waveletSmooth( x, wavelet="db4", level=1, title=None ):
 #     ax.set_xlim((0,len(y)))
     return y[:-1]
 
-waveletSmooth(rawdata)
+# denoised = waveletSmooth(rawdata)
 
 # wavelet = pywt.Wavelet('haar')
 # levels  = (np.floor(np.log(rawdata))).astype(int)
